@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import {useRef, useState} from "react";
+import TextArea from "./components/TextArea";
+import Images from "./components/Images";
+
+import {encode} from "./steno";
 
 function App() {
+    const [encodedImg, setEncodedImg] = useState("");
+    const [message, setMessage] = useState("");
+
+    const onHide = (message) => {
+        const src = encode(message, imgRef.current);
+        setEncodedImg(src)
+    }
+
+    const imgRef = useRef();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <main>
+        <TextArea onHide={onHide}  />
+        <Images ref={imgRef} encodedImg={encodedImg} setMessage={setMessage}/>
+        <h3>Թաքնագրված տեկստը ՝</h3>
+        <p>{message}</p>
+      </main>
+  )
 }
 
-export default App;
+export default App
