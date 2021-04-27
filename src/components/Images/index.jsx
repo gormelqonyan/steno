@@ -1,4 +1,4 @@
-import {forwardRef, useRef, useState} from "react";
+import {forwardRef, useState} from "react";
 import {decode} from "../../steno";
 import "./images.scss"
 
@@ -19,8 +19,8 @@ const Images = forwardRef(({encodedImg, setMessage}, ref) => {
         <div className={"images"}>
             <div className={"column"}>
                 <label htmlFor="uploadImage" className={"upload-image-label"}>
-                    <img src={uploadedImage || "https://i.stack.imgur.com/y9DpT.jpg"} ref={ref}/>
-                    <input id={"uploadImage"} type="file" onChange={handleSelectImage} className={"upload-image"}/>
+                    <img src={uploadedImage || "https://i.stack.imgur.com/y9DpT.jpg"} ref={ref} alt={"encode"}/>
+                    <input id={"uploadImage"} type="file" onChange={handleSelectImage} className={"upload-image"} />
                 </label>
                 {
                     uploadedImage && <div className={"btn"} onClick={handleDecode}>Կարդալ</div>
@@ -28,7 +28,7 @@ const Images = forwardRef(({encodedImg, setMessage}, ref) => {
             </div>
             {encodedImg && (
                 <div className={"column"}>
-                    <img src={encodedImg} className={"decodet-image"}/>
+                    <img src={encodedImg} className={"decodet-image"} alt={"decoded"}/>
                     <a
                         id="download"
                         href={encodedImg.replace("image/png", "image/octet-stream")}
